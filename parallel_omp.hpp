@@ -80,13 +80,13 @@ bool parallel_openMP_compress_stream(ReadOnlyFileMap& in,
 	  //Compressione
 	  int zret = deflate(&s, Z_FINISH);
       
-	  if (zret == Z_STREAM_ERROR) {
+	  if(zret == Z_STREAM_ERROR){
 #pragma omp atomic write
 		ok = false;
-	  } else {
+	  }else{
 		//Ridimensiona alla dimensione reale dei dati compressi
 		compressed_sizes[i] = s.total_out;
-		}
+	  }
 	  deflateEnd(&s);
 	}
   }
